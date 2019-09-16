@@ -29,31 +29,10 @@ public class Robot {
     }
 
     public void turnRight(){
-        if (directions.equals(Directions.NORTH)){
-            this.directions = Directions.EAST;
-        }else if (directions.equals(Directions.EAST)){
-            this.directions = Directions.SOUTH;
-        }else if (directions.equals(Directions.SOUTH)){
-            this.directions = Directions.WEST;
-        }else if (directions.equals(Directions.WEST)){
-            this.directions = Directions.NORTH;
-        }else {
-            System.out.println("Salah Arah!");
-        }
+        this.directions = this.directions.getright();
     }
-
     public void turnLeft(){
-        if (directions.equals(Directions.NORTH)){
-            this.directions = Directions.WEST;
-        }else if(directions.equals(Directions.WEST)){
-            this.directions = Directions.SOUTH;
-        }else if(directions.equals(Directions.SOUTH)){
-            this.directions = Directions.EAST;
-        }else if (directions.equals(Directions.EAST)){
-            this.directions = Directions.NORTH;
-        }else {
-            System.out.println("Salah Arah!");
-        }
+        this.directions = this.directions.getleft();
     }
 
     public void forward(){
@@ -74,28 +53,10 @@ public class Robot {
         }
     }
 
-    public void backward(){
-        if (directions.equals(Directions.NORTH)){
-            this.postY--;
-            this.directions = Directions.NORTH;
-        }else if (directions.equals(Directions.WEST)){
-            this.postX++;
-            this.directions = Directions.WEST;
-        }else if (directions.equals(Directions.SOUTH)){
-            this.postY++;
-            this.directions = Directions.SOUTH;
-        }else if (directions.equals(Directions.EAST)){
-            this.postX--;
-            this.directions = Directions.EAST;
-        }else {
-            System.out.println("Arah anda salah");
-        }
-    }
     public String print() {
         return "Car{" +
                 "postX=" + postX +
                 ", postY=" + postY +
-
                 ", commands=" + Arrays.toString(commands) +
                 ", direction=" + directions +
                 '}';
@@ -112,15 +73,10 @@ public class Robot {
             case FORWARD:
                 forward();
                 break;
-            case BACKWARD:
-                backward();
             default:
                 System.out.println("Invalid move");
-
-
         }
     }
-
 
     public void run(){
         for (int i = 0; i < this.commands.length; i++){
@@ -128,8 +84,10 @@ public class Robot {
             System.out.println(this.commands[i]+getPosition()+this.directions);
         }
     }
+
     public String getPosition(){
         return "("+this.postX+","+this.postY+")";
 
     }
+
 }
